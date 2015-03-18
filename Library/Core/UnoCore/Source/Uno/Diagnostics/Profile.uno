@@ -33,6 +33,13 @@ namespace Uno.Diagnostics
             StartTimeStamp = Clock.GetSeconds();
         }
 
+        public static void Reset()
+        {
+            _profileData.ProfileEvents.Clear();
+            _isProfiling = true;
+            StartTimeStamp = Clock.GetSeconds();
+        }
+
         public static void AddFunctionId(string name)
         {
             _profileData.FunctionIds.Add(name);
