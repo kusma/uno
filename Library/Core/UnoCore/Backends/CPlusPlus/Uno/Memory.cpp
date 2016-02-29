@@ -744,13 +744,13 @@ uString* uString::New(int32_t length)
 
 #ifdef DEBUG_DUMPS
 
-static void uDumpObject(FILE* fp, uObject* object, const char* label)
+static void uDumpObject(FILE* fp, const uObject* object, const char* label)
 {
     fprintf(fp, "\tobject_at_%p [label=\"%s refcount: %d\"]\n",
             object, label, object->__retains);
 }
 
-static void uDumpGlobalRef(FILE* fp, uObject** object, const char* label)
+static void uDumpGlobalRef(FILE* fp, const uObject** object, const char* label)
 {
     fprintf(fp, "\tglobal_ref_at_%p [label=\"%s\" color=\"blue\"]\n",
             object, label);
@@ -758,13 +758,13 @@ static void uDumpGlobalRef(FILE* fp, uObject** object, const char* label)
         fprintf(fp, "\tglobal_ref_at_%p -> object_at_%p\n", object, *object);
 }
 
-static void uDumpStrongRef(FILE* fp, uObject* object, const char *label, uObject* target)
+static void uDumpStrongRef(FILE* fp, const uObject* object, const char *label, const uObject* target)
 {
     if (target)
         fprintf(fp, "\tobject_at_%p -> object_at_%p [label=\"%s\"]\n", object, target, label);
 }
 
-static void uDumpAllStrongRefs(FILE* fp, uObject* object, void* base, uType* type, const char *labelPrefix = "")
+static void uDumpAllStrongRefs(FILE* fp, const uObject* object, void* base, const uType* type, const char *labelPrefix = "")
 {
     do
     {
@@ -808,7 +808,7 @@ static void uDumpAllStrongRefs(FILE* fp, uObject* object, void* base, uType* typ
     } while (type);
 }
 
-static void uDumpObjectAndStrongRefs(FILE* fp, uObject* object)
+static void uDumpObjectAndStrongRefs(FILE* fp, const uObject* object)
 {
     uType* type = object->GetType();
 
