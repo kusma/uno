@@ -59,6 +59,14 @@ namespace Uno.Text.Test
         }
 
         [Test]
+        public void IgnoreCase()
+        {
+            var regex = new Regex("[a-z]+", RegexOptions.IgnoreCase);
+            Assert.AreEqual(true, regex.IsMatch("foo"));
+            Assert.AreEqual(true, regex.IsMatch("FOO"));
+        }
+
+        [Test]
         public void EmptyMatch()
         {
             var regex = new Regex("[a-z]?");
