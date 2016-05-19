@@ -59,6 +59,35 @@ namespace Uno.Text.Test
         }
 
         [Test]
+        public void Unicode1()
+        {
+            var regex = new Regex("[\u00C5]+", RegexOptions.IgnoreCase);
+            Assert.AreEqual(true, regex.IsMatch("\u00C5"));
+            Assert.AreEqual(true, regex.IsMatch("\u00E5"));
+        }
+
+        [Test]
+        [Ignore("No real support for Unicode", "CPLUSPLUS")]
+        public void Unicode2()
+        {
+            var regex = new Regex("[\u04D2]+", RegexOptions.IgnoreCase);
+            Assert.AreEqual(true, regex.IsMatch("\u04D2"));
+            Assert.AreEqual(true, regex.IsMatch("\u04D3"));
+            Assert.AreEqual(false, regex.IsMatch("\xD2"));
+            Assert.AreEqual(false, regex.IsMatch("\x92"));
+        }
+
+        [Test]
+        [Ignore("No real support for Unicode", "CPLUSPLUS")]
+        public void Unicode3()
+        {
+            // 'DESERET CAPITAL LETTER LONG I' (U+10400)
+            var regex = new Regex("[\uD801\uDC00]+", RegexOptions.IgnoreCase);
+            Assert.AreEqual(true, regex.IsMatch("\uD801\uDC00"));
+            Assert.AreEqual(true, regex.IsMatch("\uD801\uDC28"));
+        }
+
+        [Test]
         public void IgnoreCase()
         {
             var regex = new Regex("[a-z]+", RegexOptions.IgnoreCase);
