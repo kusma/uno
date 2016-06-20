@@ -15,6 +15,9 @@ namespace OpenGL
 
         public static int GetInteger(GLIntegerName name)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 int result;
@@ -35,6 +38,9 @@ namespace OpenGL
 
         public static int4 GetInteger(GLInteger4Name name)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 @{int4} result;
@@ -58,6 +64,9 @@ namespace OpenGL
 
         public static void Disable(GLEnableCap cap)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glDisable($@);
@@ -76,6 +85,9 @@ namespace OpenGL
 
         public static void Enable(GLEnableCap cap)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glEnable($@);
@@ -113,6 +125,9 @@ namespace OpenGL
 
         public static void Flush()
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glFlush();
@@ -149,6 +164,9 @@ namespace OpenGL
 
         public static string GetString(GLStringName name)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 const char* str = (const char*)glGetString($@);
@@ -172,6 +190,9 @@ namespace OpenGL
         // IsEnabled
         public static void PixelStore(GLPixelStoreParameter pname, int param)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glPixelStorei($@);
@@ -193,6 +214,9 @@ namespace OpenGL
 
         public static void Clear(GLClearBufferMask mask)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glClear($@);
@@ -211,6 +235,9 @@ namespace OpenGL
 
         public static void ClearColor(float red, float green, float blue, float alpha)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glClearColor($@);
@@ -229,6 +256,9 @@ namespace OpenGL
 
         public static void ClearDepth(float depth)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
 #ifdef U_GL_DESKTOP
@@ -252,6 +282,9 @@ namespace OpenGL
         //public static void ClearStencil(int s);
         public static void ColorMask(bool red, bool green, bool blue, bool alpha)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glColorMask($@);
@@ -270,6 +303,9 @@ namespace OpenGL
 
         public static void DepthMask(bool flag)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glDepthMask($@);
@@ -296,6 +332,9 @@ namespace OpenGL
 
         public static void BlendEquation(GLBlendEquation mode)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glBlendEquation($@);
@@ -314,6 +353,9 @@ namespace OpenGL
 
         public static void BlendEquationSeparate(GLBlendEquation modeRgb, GLBlendEquation modeAlpha)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glBlendEquationSeparate($@);
@@ -332,6 +374,9 @@ namespace OpenGL
 
         public static void BlendFunc(GLBlendingFactor src, GLBlendingFactor dst)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glBlendFunc($@);
@@ -350,6 +395,9 @@ namespace OpenGL
 
         public static void BlendFuncSeparate(GLBlendingFactor srcRGB, GLBlendingFactor dstRGB, GLBlendingFactor srcAlpha, GLBlendingFactor dstAlpha)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glBlendFuncSeparate($@);
@@ -368,6 +416,9 @@ namespace OpenGL
 
         public static void DepthFunc(GLDepthFunction func)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glDepthFunc($@);
@@ -395,6 +446,9 @@ namespace OpenGL
 
         public static void CullFace(GLCullFaceMode mode)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glCullFace($@);
@@ -413,6 +467,9 @@ namespace OpenGL
 
         public static void FrontFace(GLFrontFaceDirection mode)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glFrontFace($@);
@@ -431,6 +488,9 @@ namespace OpenGL
 
         public static void LineWidth(float width)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glLineWidth($@);
@@ -449,6 +509,9 @@ namespace OpenGL
 
         public static void PolygonOffset(float factor, float units)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glPolygonOffset($@);
@@ -470,6 +533,9 @@ namespace OpenGL
 
         public static void DepthRange(float zNear, float zFar)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
 #ifdef U_GL_DESKTOP
@@ -492,6 +558,9 @@ namespace OpenGL
 
         public static void Scissor(int x, int y, int width, int height)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glScissor($@);
@@ -510,6 +579,9 @@ namespace OpenGL
 
         public static void Viewport(int x, int y, int width, int height)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glViewport($@);
@@ -531,6 +603,9 @@ namespace OpenGL
 
         public static void BindBuffer(GLBufferTarget target, GLBufferHandle buffer)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glBindBuffer($@);
@@ -550,6 +625,9 @@ namespace OpenGL
         [ExportName("BufferDatai")]
         public static void BufferData(GLBufferTarget target, int sizeInBytes, GLBufferUsage usage)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glBufferData($0, $1, NULL, $2);
@@ -590,6 +668,9 @@ namespace OpenGL
         [DotNetOverride, Obsolete("Use the byte[] overload instead")]
         public static void BufferData(GLBufferTarget target, Buffer data, GLBufferUsage usage)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glBufferData($0, U_BUFFER_SIZE($1), U_BUFFER_PTR($1), $2);
@@ -632,6 +713,9 @@ namespace OpenGL
         [DotNetOverride, Obsolete("Use the byte[] overload instead")]
         public static void BufferSubData(GLBufferTarget target, int offset, Buffer data)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glBufferSubData($0, $1, U_BUFFER_SIZE($2), U_BUFFER_PTR($2));
@@ -652,6 +736,9 @@ namespace OpenGL
 
         public static GLBufferHandle CreateBuffer()
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 GLuint handle;
@@ -672,6 +759,9 @@ namespace OpenGL
 
         public static void DeleteBuffer(GLBufferHandle buffer)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glDeleteBuffers(1, &$0);
@@ -696,6 +786,9 @@ namespace OpenGL
 
         public static void BindFramebuffer(GLFramebufferTarget target, GLFramebufferHandle fb)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glBindFramebuffer($@);
@@ -714,6 +807,9 @@ namespace OpenGL
 
         public static GLFramebufferStatus CheckFramebufferStatus(GLFramebufferTarget target)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 return glCheckFramebufferStatus($@);
@@ -732,6 +828,9 @@ namespace OpenGL
 
         public static GLFramebufferHandle CreateFramebuffer()
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 GLuint handle;
@@ -752,6 +851,9 @@ namespace OpenGL
 
         public static void DeleteFramebuffer(GLFramebufferHandle fb)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glDeleteFramebuffers(1, &$0);
@@ -770,6 +872,9 @@ namespace OpenGL
 
         public static void FramebufferTexture2D(GLFramebufferTarget target, GLFramebufferAttachment attachment, GLTextureTarget textarget, GLTextureHandle texture, int level)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glFramebufferTexture2D($@);
@@ -788,6 +893,9 @@ namespace OpenGL
 
         public static void FramebufferRenderbuffer(GLFramebufferTarget target, GLFramebufferAttachment attachment, GLRenderbufferTarget renderbuffertarget, GLRenderbufferHandle renderbuffer)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glFramebufferRenderbuffer($@);
@@ -809,6 +917,9 @@ namespace OpenGL
 
         public static GLFramebufferHandle GetFramebufferBinding()
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 GLuint result;
@@ -832,6 +943,9 @@ namespace OpenGL
 
         public static void BindRenderbuffer(GLRenderbufferTarget target, GLRenderbufferHandle renderbuffer)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glBindRenderbuffer($@);
@@ -850,6 +964,9 @@ namespace OpenGL
 
         public static GLRenderbufferHandle CreateRenderbuffer()
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 GLuint handle;
@@ -870,6 +987,9 @@ namespace OpenGL
 
         public static void DeleteRenderbuffer(GLRenderbufferHandle renderbuffer)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glDeleteRenderbuffers(1, &$0);
@@ -891,6 +1011,9 @@ namespace OpenGL
 
         public static void RenderbufferStorage(GLRenderbufferTarget target, GLRenderbufferStorage internalFormat, int width, int height)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glRenderbufferStorage($@);
@@ -909,6 +1032,9 @@ namespace OpenGL
 
         public static GLRenderbufferHandle GetRenderbufferBinding()
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 GLuint result;
@@ -932,6 +1058,9 @@ namespace OpenGL
 
         public static void ActiveTexture(GLTextureUnit texture)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glActiveTexture($@);
@@ -950,6 +1079,9 @@ namespace OpenGL
 
         public static void BindTexture(GLTextureTarget target, GLTextureHandle texture)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glBindTexture($@);
@@ -971,6 +1103,9 @@ namespace OpenGL
 
         public static GLTextureHandle CreateTexture()
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 GLuint handle;
@@ -991,6 +1126,9 @@ namespace OpenGL
 
         public static void DeleteTexture(GLTextureHandle texture)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glDeleteTextures(1, &$0);
@@ -1009,6 +1147,9 @@ namespace OpenGL
 
         public static void GenerateMipmap(GLTextureTarget target)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glGenerateMipmap($@);
@@ -1031,6 +1172,9 @@ namespace OpenGL
         [DotNetOverride]
         public static void TexImage2D(GLTextureTarget target, int level, GLPixelFormat internalFormat, int width, int height, int border, GLPixelFormat format, GLPixelType type, byte[] data)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glTexImage2D($0, $1, $2, $3, $4, $5, $6, $7, $8 ? $8->Ptr() : NULL);
@@ -1102,6 +1246,9 @@ namespace OpenGL
 
         public static void TexImage2D(GLTextureTarget target, int level, GLPixelFormat internalFormat, int width, int height, int border, GLPixelFormat format, GLPixelType type, IntPtr data)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glTexImage2D($@);
@@ -1173,6 +1320,9 @@ namespace OpenGL
         [ExportName("TexParameteri")]
         public static void TexParameter(GLTextureTarget target, GLTextureParameterName pname, GLTextureParameterValue param)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glTexParameteri($@);
@@ -1196,6 +1346,9 @@ namespace OpenGL
 
         public static void AttachShader(GLProgramHandle program, GLShaderHandle shader)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glAttachShader($@);
@@ -1214,6 +1367,9 @@ namespace OpenGL
 
         public static void BindAttribLocation(GLProgramHandle handle, int index, string name)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glBindAttribLocation($0, $1, uCString($2).Ptr);
@@ -1232,6 +1388,9 @@ namespace OpenGL
 
         public static void CompileShader(GLShaderHandle shader)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glCompileShader($@);
@@ -1250,6 +1409,9 @@ namespace OpenGL
 
         public static GLProgramHandle CreateProgram()
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 return glCreateProgram($@);
@@ -1268,6 +1430,9 @@ namespace OpenGL
 
         public static GLShaderHandle CreateShader(GLShaderType type)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 return glCreateShader($@);
@@ -1286,6 +1451,9 @@ namespace OpenGL
 
         public static void DeleteProgram(GLProgramHandle program)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glDeleteProgram($@);
@@ -1304,6 +1472,9 @@ namespace OpenGL
 
         public static void DeleteShader(GLShaderHandle shader)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glDeleteShader($@);
@@ -1322,6 +1493,9 @@ namespace OpenGL
 
         public static void DetachShader(GLProgramHandle program, GLShaderHandle shader)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glDetachShader($@);
@@ -1342,6 +1516,9 @@ namespace OpenGL
 
         public static int GetProgramParameter(GLProgramHandle program, GLProgramParameter pname)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 GLint result;
@@ -1362,6 +1539,9 @@ namespace OpenGL
 
         public static string GetProgramInfoLog(GLProgramHandle program)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 int len = 0;
@@ -1384,6 +1564,9 @@ namespace OpenGL
 
         public static int GetShaderParameter(GLShaderHandle shader, GLShaderParameter pname)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 GLint result;
@@ -1404,6 +1587,9 @@ namespace OpenGL
 
         public static string GetShaderInfoLog(GLShaderHandle shader)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 int len = 0;
@@ -1430,6 +1616,9 @@ namespace OpenGL
 
         public static void LinkProgram(GLProgramHandle program)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glLinkProgram($@);
@@ -1448,6 +1637,9 @@ namespace OpenGL
 
         public static void ShaderSource(GLShaderHandle shader, string source)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 uCString cstr($1);
@@ -1484,6 +1676,9 @@ namespace OpenGL
 
         public static void UseProgram(GLProgramHandle program)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUseProgram($@);
@@ -1529,6 +1724,9 @@ namespace OpenGL
 
         public static GLShaderPrecisionFormat GetShaderPrecisionFormat(GLShaderType shaderType, GLShaderPrecision precision)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 @{GLShaderPrecisionFormat} result;
@@ -1556,6 +1754,9 @@ namespace OpenGL
 
         public static void DisableVertexAttribArray(int index)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glDisableVertexAttribArray($@);
@@ -1574,6 +1775,9 @@ namespace OpenGL
 
         public static void EnableVertexAttribArray(int index)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glEnableVertexAttribArray($@);
@@ -1595,6 +1799,9 @@ namespace OpenGL
 
         public static int GetAttribLocation(GLProgramHandle program, string name)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 return glGetAttribLocation($0, uCString($1).Ptr);
@@ -1615,6 +1822,9 @@ namespace OpenGL
 
         public static int GetUniformLocation(GLProgramHandle program, string name)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 return glGetUniformLocation($0, uCString($1).Ptr);
@@ -1636,6 +1846,9 @@ namespace OpenGL
         [ExportName("Uniform1i")]
         public static void Uniform1(int location, int value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform1i($@);
@@ -1655,6 +1868,9 @@ namespace OpenGL
         [ExportName("Uniform2i")]
         public static void Uniform2(int location, int2 value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform2iv($0, 1, (const GLint*)&$1);
@@ -1674,6 +1890,9 @@ namespace OpenGL
         [ExportName("Uniform3i")]
         public static void Uniform3(int location, int3 value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform3iv($0, 1, (const GLint*)&$1);
@@ -1693,6 +1912,9 @@ namespace OpenGL
         [ExportName("Uniform4i")]
         public static void Uniform4(int location, int4 value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform4iv($0, 1, (const GLint*)&$1);
@@ -1712,6 +1934,9 @@ namespace OpenGL
         [ExportName("Uniform1f")]
         public static void Uniform1(int location, float value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform1f($@);
@@ -1731,6 +1956,9 @@ namespace OpenGL
         [ExportName("Uniform2f")]
         public static void Uniform2(int location, float2 value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform2fv($0, 1, (const GLfloat*)&$1);
@@ -1750,6 +1978,9 @@ namespace OpenGL
         [ExportName("Uniform3f")]
         public static void Uniform3(int location, float3 value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform3fv($0, 1, (const GLfloat*)&$1);
@@ -1769,6 +2000,9 @@ namespace OpenGL
         [ExportName("Uniform4f")]
         public static void Uniform4(int location, float4 value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform4fv($0, 1, (const GLfloat*)&$1);
@@ -1788,6 +2022,9 @@ namespace OpenGL
         [ExportName("UniformMatrix2f")]
         public static void UniformMatrix2(int location, bool transpose, float2x2 value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniformMatrix2fv($0, 1, $1, (const GLfloat*)&$2);
@@ -1807,6 +2044,9 @@ namespace OpenGL
         [ExportName("UniformMatrix3f")]
         public static void UniformMatrix3(int location, bool transpose, float3x3 value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniformMatrix3fv($0, 1, $1, (const GLfloat*)&$2);
@@ -1826,6 +2066,9 @@ namespace OpenGL
         [ExportName("UniformMatrix4f")]
         public static void UniformMatrix4(int location, bool transpose, float4x4 value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniformMatrix4fv($0, 1, $1, (const GLfloat*)&$2);
@@ -1845,6 +2088,9 @@ namespace OpenGL
         [ExportName("Uniform1iv")]
         public static void Uniform1(int location, int[] value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform1iv($0, $1->Length(), (const GLint*)$1->Ptr());
@@ -1864,6 +2110,9 @@ namespace OpenGL
         [ExportName("Uniform2iv")]
         public static void Uniform2(int location, int2[] value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform2iv($0, $1->Length(), (const GLint*)$1->Ptr());
@@ -1883,6 +2132,9 @@ namespace OpenGL
         [ExportName("Uniform3iv")]
         public static void Uniform3(int location, int3[] value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform3iv($0, $1->Length(), (const GLint*)$1->Ptr());
@@ -1902,6 +2154,9 @@ namespace OpenGL
         [ExportName("Uniform4iv")]
         public static void Uniform4(int location, int4[] value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform4iv($0, $1->Length(), (const GLint*)$1->Ptr());
@@ -1921,6 +2176,9 @@ namespace OpenGL
         [ExportName("Uniform1fv")]
         public static void Uniform1(int location, float[] value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform1fv($0, $1->Length(), (const GLfloat*)$1->Ptr());
@@ -1940,6 +2198,9 @@ namespace OpenGL
         [ExportName("Uniform2fv")]
         public static void Uniform2(int location, float2[] value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform2fv($0, $1->Length(), (const GLfloat*)$1->Ptr());
@@ -1959,6 +2220,9 @@ namespace OpenGL
         [ExportName("Uniform3fv")]
         public static void Uniform3(int location, float3[] value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform3fv($0, $1->Length(), (const GLfloat*)$1->Ptr());
@@ -1978,6 +2242,9 @@ namespace OpenGL
         [ExportName("Uniform4fv")]
         public static void Uniform4(int location, float4[] value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniform4fv($0, $1->Length(), (const GLfloat*)$1->Ptr());
@@ -1997,6 +2264,9 @@ namespace OpenGL
         [ExportName("UniformMatrix2fv")]
         public static void UniformMatrix2(int location, bool transpose, float2x2[] value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniformMatrix2fv($0, $2->Length(), $1, (const GLfloat*)$2->Ptr());
@@ -2016,6 +2286,9 @@ namespace OpenGL
         [ExportName("UniformMatrix3fv")]
         public static void UniformMatrix3(int location, bool transpose, float3x3[] value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniformMatrix3fv($0, $2->Length(), $1, (const GLfloat*)$2->Ptr());
@@ -2035,6 +2308,9 @@ namespace OpenGL
         [ExportName("UniformMatrix4fv")]
         public static void UniformMatrix4(int location, bool transpose, float4x4[] value)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glUniformMatrix4fv($0, $2->Length(), $1, (const GLfloat*)$2->Ptr());
@@ -2055,6 +2331,9 @@ namespace OpenGL
 
         public static void VertexAttribPointer(int index, int size, GLDataType type, bool normalized, int stride, int offset)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glVertexAttribPointer($0, $1, $2, $3, $4, (const GLvoid*)(size_t)$5);
@@ -2075,6 +2354,9 @@ namespace OpenGL
 
         public static void DrawArrays(GLPrimitiveType mode, int first, int count)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glDrawArrays($@);
@@ -2093,6 +2375,9 @@ namespace OpenGL
 
         public static void DrawElements(GLPrimitiveType mode, int count, GLIndexType type, int offset)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glDrawElements($0, $1, $2, (const GLvoid*)(size_t)$3);
@@ -2113,6 +2398,9 @@ namespace OpenGL
 
         public static void ReadPixels(int x, int y, int width, int height, GLPixelFormat format, GLPixelType type, byte[] data)
         {
+            if defined(OPENGL_VALIDATION)
+                ValidateBefore();
+
             if defined(CPLUSPLUS)
             @{
                 glReadPixels($0, $1, $2, $3, $4, $5, (uint8_t*)$6->_ptr);
@@ -2138,7 +2426,6 @@ namespace OpenGL
         //public static string[] GetSupportedExtensions();
         //public static object GetExtension(string name);
 
-
         // .NET specific set up
         extern(DOTNET) static IGL _gl;
 
@@ -2161,6 +2448,11 @@ namespace OpenGL
                 Debug.Log("GL_RENDERER: " + gl.GetString(GLStringName.Renderer));
                 throw new NotSupportedException("OpenGL 2.0 is required to run this application");
             }
+        }
+
+        static void ValidateBefore()
+        {
+            // nothing for now
         }
     }
 }
