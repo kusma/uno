@@ -5,6 +5,7 @@
     <Define GRADLE />
     <Define MOBILE />
     <Define UNIX />
+    <Define EGL />
 
     <Set BundleDirectory="app/src/main/assets" />
     <Set HeaderDirectory="app/src/main/include" />
