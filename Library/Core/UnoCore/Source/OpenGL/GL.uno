@@ -18,22 +18,26 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            int result;
             if defined(CPLUSPLUS)
             @{
-                int result;
                 glGetIntegerv($@, (GLint*)&result);
-                return result;
             @}
             else if defined(DOTNET)
             {
-                return _gl.GetInteger(name);
+                result = _gl.GetInteger(name);
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.getParameter($@) | 0;
+                result = gl.getParameter($@) | 0;
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         public static int4 GetInteger(GLInteger4Name name)
@@ -41,23 +45,27 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            int4 result;
             if defined(CPLUSPLUS)
             @{
-                @{int4} result;
                 glGetIntegerv($@, (GLint*)&result);
-                return result;
             @}
             else if defined(DOTNET)
             {
-                return _gl.GetInteger(name);
+                result = _gl.GetInteger(name);
             }
             else if defined(JAVASCRIPT)
             @{
                 var p = gl.getParameter($@);
-                return @{int4(int,int,int,int):New(p[0] | 0, p[1] | 0, p[2] | 0, p[3] | 0)};
+                result = @{int4(int,int,int,int):New(p[0] | 0, p[1] | 0, p[2] | 0, p[3] | 0)};
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         // Special Functions [5.14.3]
@@ -81,6 +89,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void Enable(GLEnableCap cap)
@@ -120,6 +131,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
 
@@ -146,20 +160,26 @@ namespace OpenGL
 
         public static GLError GetError()
         {
+            GLError result;
             if defined(CPLUSPLUS)
             @{
-                return glGetError();
+                result = glGetError();
             @}
             else if defined(DOTNET)
             {
-                return _gl.GetError();
+                result = _gl.GetError();
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.getError();
+                result = gl.getError();
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         public static string GetString(GLStringName name)
@@ -167,22 +187,28 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            string result;
             if defined(CPLUSPLUS)
             @{
                 const char* str = (const char*)glGetString($@);
                 if (!str) str = "";
-                return uString::Utf8(str);
+                result = uString::Utf8(str);
             @}
             else if defined(DOTNET)
             {
-                return _gl.GetString(name);
+                result = _gl.GetString(name);
             }
             else if defined(JAVASCRIPT)
             @{
-                return "" + gl.getParameter($@);
+                result = "" + gl.getParameter($@);
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         // GetParameter
@@ -207,6 +233,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
 
@@ -231,6 +260,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void ClearColor(float red, float green, float blue, float alpha)
@@ -252,6 +284,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void ClearDepth(float depth)
@@ -277,6 +312,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         //public static void ClearStencil(int s);
@@ -299,6 +337,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void DepthMask(bool flag)
@@ -320,6 +361,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         //public static void StencilMask(uint mask);
@@ -349,6 +393,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void BlendEquationSeparate(GLBlendEquation modeRgb, GLBlendEquation modeAlpha)
@@ -370,6 +417,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void BlendFunc(GLBlendingFactor src, GLBlendingFactor dst)
@@ -391,6 +441,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void BlendFuncSeparate(GLBlendingFactor srcRGB, GLBlendingFactor dstRGB, GLBlendingFactor srcAlpha, GLBlendingFactor dstAlpha)
@@ -412,6 +465,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void DepthFunc(GLDepthFunction func)
@@ -433,6 +489,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         //public static void SampleCoverage(float value, bool invert);
@@ -463,6 +522,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void FrontFace(GLFrontFaceDirection mode)
@@ -484,6 +546,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void LineWidth(float width)
@@ -505,6 +570,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void PolygonOffset(float factor, float units)
@@ -526,6 +594,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
 
@@ -554,6 +625,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void Scissor(int x, int y, int width, int height)
@@ -575,6 +649,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void Viewport(int x, int y, int width, int height)
@@ -596,6 +673,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
 
@@ -620,6 +700,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("BufferDatai")]
@@ -663,6 +746,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [DotNetOverride, Obsolete("Use the byte[] overload instead")]
@@ -708,6 +794,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [DotNetOverride, Obsolete("Use the byte[] overload instead")]
@@ -732,6 +821,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static GLBufferHandle CreateBuffer()
@@ -739,22 +831,26 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            GLBufferHandle result;
             if defined(CPLUSPLUS)
             @{
-                GLuint handle;
-                glGenBuffers(1, &handle);
-                return handle;
+                glGenBuffers(1, &result);
             @}
             else if defined(DOTNET)
             {
-                return _gl.CreateBuffer();
+                result =  _gl.CreateBuffer();
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.createBuffer();
+                result = gl.createBuffer();
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         public static void DeleteBuffer(GLBufferHandle buffer)
@@ -776,6 +872,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         //public static object GetBufferParameter(enum target, enum pname);
@@ -803,6 +902,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static GLFramebufferStatus CheckFramebufferStatus(GLFramebufferTarget target)
@@ -810,20 +912,26 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            GLFramebufferStatus result;
             if defined(CPLUSPLUS)
             @{
-                return glCheckFramebufferStatus($@);
+                result = glCheckFramebufferStatus($@);
             @}
             else if defined(DOTNET)
             {
-                return _gl.CheckFramebufferStatus(target);
+                result = _gl.CheckFramebufferStatus(target);
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.checkFramebufferStatus($@);
+                result = gl.checkFramebufferStatus($@);
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         public static GLFramebufferHandle CreateFramebuffer()
@@ -831,22 +939,26 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            GLFramebufferHandle result;
             if defined(CPLUSPLUS)
             @{
-                GLuint handle;
-                glGenFramebuffers(1, &handle);
-                return handle;
+                glGenFramebuffers(1, &result);
             @}
             else if defined(DOTNET)
             {
-                return _gl.CreateFramebuffer();
+                result = _gl.CreateFramebuffer();
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.createFramebuffer();
+                result = gl.createFramebuffer();
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         public static void DeleteFramebuffer(GLFramebufferHandle fb)
@@ -868,6 +980,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void FramebufferTexture2D(GLFramebufferTarget target, GLFramebufferAttachment attachment, GLTextureTarget textarget, GLTextureHandle texture, int level)
@@ -889,6 +1004,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void FramebufferRenderbuffer(GLFramebufferTarget target, GLFramebufferAttachment attachment, GLRenderbufferTarget renderbuffertarget, GLRenderbufferHandle renderbuffer)
@@ -910,6 +1028,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         // IsFramebuffer
@@ -920,22 +1041,26 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            GLFramebufferHandle result;
             if defined(CPLUSPLUS)
             @{
-                GLuint result;
                 glGetIntegerv(GL_FRAMEBUFFER_BINDING, (GLint*)&result);
-                return result;
             @}
             else if defined(DOTNET)
             {
-                return _gl.GetFramebufferBinding();
+                result = return _gl.GetFramebufferBinding();
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.getParameter(gl.FRAMEBUFFER_BINDING);
+                result = gl.getParameter(gl.FRAMEBUFFER_BINDING);
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
 
@@ -960,6 +1085,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static GLRenderbufferHandle CreateRenderbuffer()
@@ -967,22 +1095,26 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            GLRenderbufferHandle result;
             if defined(CPLUSPLUS)
             @{
-                GLuint handle;
-                glGenRenderbuffers(1, &handle);
-                return handle;
+                glGenRenderbuffers(1, &result);
             @}
             else if defined(DOTNET)
             {
-                return _gl.CreateRenderbuffer();
+                result =  _gl.CreateRenderbuffer();
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.createRenderbuffer();
+                result = gl.createRenderbuffer();
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         public static void DeleteRenderbuffer(GLRenderbufferHandle renderbuffer)
@@ -1004,6 +1136,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         // GetRenderbufferParameter
@@ -1028,6 +1163,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static GLRenderbufferHandle GetRenderbufferBinding()
@@ -1035,22 +1173,26 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            GLRenderbufferHandle result;
             if defined(CPLUSPLUS)
             @{
-                GLuint result;
                 glGetIntegerv(GL_RENDERBUFFER_BINDING, (GLint*)&result);
-                return result;
             @}
             else if defined(DOTNET)
             {
-                return _gl.GetRenderbufferBinding();
+                result = _gl.GetRenderbufferBinding();
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.getParameter(gl.RENDERBUFFER_BINDING);
+                result = gl.getParameter(gl.RENDERBUFFER_BINDING);
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
 
@@ -1075,6 +1217,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void BindTexture(GLTextureTarget target, GLTextureHandle texture)
@@ -1096,6 +1241,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         // CopyTexImage2D
@@ -1106,22 +1254,26 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            GLTextureHandle result;
             if defined(CPLUSPLUS)
             @{
-                GLuint handle;
-                glGenTextures(1, &handle);
-                return handle;
+                glGenTextures(1, &result);
             @}
             else if defined(DOTNET)
             {
-                return _gl.CreateTexture();
+                result = _gl.CreateTexture();
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.createTexture();
+                result = gl.createTexture();
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         public static void DeleteTexture(GLTextureHandle texture)
@@ -1143,6 +1295,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void GenerateMipmap(GLTextureTarget target)
@@ -1164,6 +1319,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         // GetTexParameter
@@ -1242,6 +1400,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void TexImage2D(GLTextureTarget target, int level, GLPixelFormat internalFormat, int width, int height, int border, GLPixelFormat format, GLPixelType type, IntPtr data)
@@ -1315,6 +1476,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("TexParameteri")]
@@ -1337,6 +1501,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         // TexSubImage2D
@@ -1363,6 +1530,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void BindAttribLocation(GLProgramHandle handle, int index, string name)
@@ -1384,6 +1554,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void CompileShader(GLShaderHandle shader)
@@ -1405,6 +1578,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static GLProgramHandle CreateProgram()
@@ -1412,20 +1588,26 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            GLProgramHandle result;
             if defined(CPLUSPLUS)
             @{
-                return glCreateProgram($@);
+                result = glCreateProgram($@);
             @}
             else if defined(DOTNET)
             {
-                return _gl.CreateProgram();
+                result = _gl.CreateProgram();
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.createProgram($@);
+                result = gl.createProgram($@);
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         public static GLShaderHandle CreateShader(GLShaderType type)
@@ -1433,20 +1615,26 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            GLShaderHandle result;
             if defined(CPLUSPLUS)
             @{
-                return glCreateShader($@);
+                result = glCreateShader($@);
             @}
             else if defined(DOTNET)
             {
-                return _gl.CreateShader(type);
+                result = _gl.CreateShader(type);
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.createShader($@);
+                result = gl.createShader($@);
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         public static void DeleteProgram(GLProgramHandle program)
@@ -1468,6 +1656,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void DeleteShader(GLShaderHandle shader)
@@ -1489,6 +1680,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void DetachShader(GLProgramHandle program, GLShaderHandle shader)
@@ -1510,6 +1704,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         //public static GLShaderHandle[] GetAttachedShaders(GLProgramHandle program);
@@ -1519,22 +1716,26 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            int result;
             if defined(CPLUSPLUS)
             @{
-                GLint result;
                 glGetProgramiv($@, &result);
-                return result;
             @}
             else if defined(DOTNET)
             {
-                return _gl.GetProgramParameter(program, pname);
+                result = _gl.GetProgramParameter(program, pname);
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.getProgramParameter($@);
+                result = gl.getProgramParameter($@);
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         public static string GetProgramInfoLog(GLProgramHandle program)
@@ -1542,24 +1743,30 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            string result;
             if defined(CPLUSPLUS)
             @{
                 int len = 0;
                 const int bufSize = 4096;
                 char buf[bufSize];
                 glGetProgramInfoLog($0, bufSize, &len, buf);
-                return uString::Utf8(buf, len);
+                result = uString::Utf8(buf, len);
             @}
             else if defined(DOTNET)
             {
-                return _gl.GetProgramInfoLog(program);
+                result = _gl.GetProgramInfoLog(program);
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.getProgramInfoLog($@);
+                result = gl.getProgramInfoLog($@);
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         public static int GetShaderParameter(GLShaderHandle shader, GLShaderParameter pname)
@@ -1567,22 +1774,27 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            int result;
             if defined(CPLUSPLUS)
             @{
-                GLint result;
                 glGetShaderiv($@, &result);
-                return result;
             @}
             else if defined(DOTNET)
             {
-                return _gl.GetShaderParameter(shader, pname);
+                result = _gl.GetShaderParameter(shader, pname);
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.getShaderParameter($@);
+                result = gl.getShaderParameter($@);
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
+
         }
 
         public static string GetShaderInfoLog(GLShaderHandle shader)
@@ -1590,24 +1802,30 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            string result;
             if defined(CPLUSPLUS)
             @{
                 int len = 0;
                 const int bufSize = 4096;
                 char buf[bufSize];
                 glGetShaderInfoLog($0, bufSize, &len, buf);
-                return uString::Utf8(buf, len);
+                result = uString::Utf8(buf, len);
             @}
             else if defined(DOTNET)
             {
-                return _gl.GetShaderInfoLog(shader);
+                result = _gl.GetShaderInfoLog(shader);
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.getShaderInfoLog($@);
+                result = gl.getShaderInfoLog($@);
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         //public static string GetShaderSource(GLShaderHandle shader);
@@ -1633,6 +1851,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void ShaderSource(GLShaderHandle shader, string source)
@@ -1672,6 +1893,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void UseProgram(GLProgramHandle program)
@@ -1693,6 +1917,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         //public static void ValidateProgram(GLProgramHandle program);
@@ -1727,27 +1954,31 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            GLShaderPrecisionFormat result;
             if defined(CPLUSPLUS)
             @{
-                @{GLShaderPrecisionFormat} result;
 #ifdef U_GL_DESKTOP
                 memset(&result, 0, sizeof(@{GLShaderPrecisionFormat}));
 #else
                 glGetShaderPrecisionFormat($@, &result.RangeMin, &result.Precision);
 #endif
-                return result;
             @}
             else if defined(DOTNET)
             {
-                return _gl.GetShaderPrecisionFormat(shaderType, precision);
+                result = _gl.GetShaderPrecisionFormat(shaderType, precision);
             }
             else if defined(JAVASCRIPT)
             @{
-                var result = gl.getShaderPrecisionFormat($@);
-                return @{GLShaderPrecisionFormat(int, int, int):New(result.rangeMin, result.rangeMax, result.precision)};
+                var tmp = gl.getShaderPrecisionFormat($@);
+                result = @{GLShaderPrecisionFormat(int, int, int):New(tmp.rangeMin, tmp.rangeMax, tmp.precision)};
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         // Uniforms and Attributes [5.14.10]
@@ -1771,6 +2002,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void EnableVertexAttribArray(int index)
@@ -1792,6 +2026,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         //public static object GetActiveAttrib(GLProgramHandle program, string name);
@@ -1802,20 +2039,26 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            int result;
             if defined(CPLUSPLUS)
             @{
-                return glGetAttribLocation($0, uCString($1).Ptr);
+                result = glGetAttribLocation($0, uCString($1).Ptr);
             @}
             else if defined(DOTNET)
             {
-                return _gl.GetAttribLocation(program, name);
+                result = _gl.GetAttribLocation(program, name);
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.getAttribLocation($@);
+                result = gl.getAttribLocation($@);
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         //public static any GetUniform(GLProgramHandle program, int location);
@@ -1825,20 +2068,26 @@ namespace OpenGL
             if defined(OPENGL_VALIDATION)
                 ValidateBefore();
 
+            int result;
             if defined(CPLUSPLUS)
             @{
-                return glGetUniformLocation($0, uCString($1).Ptr);
+                result = glGetUniformLocation($0, uCString($1).Ptr);
             @}
             else if defined(DOTNET)
             {
-                return _gl.GetUniformLocation(program, name);
+                result = _gl.GetUniformLocation(program, name);
             }
             else if defined(JAVASCRIPT)
             @{
-                return gl.getUniformLocation($@);
+                result = gl.getUniformLocation($@);
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
+
+            return result;
         }
 
         //public static any GetVertexAttrib(uint index, enum pname);
@@ -1863,6 +2112,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform2i")]
@@ -1885,6 +2137,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform3i")]
@@ -1907,6 +2162,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform4i")]
@@ -1929,6 +2187,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform1f")]
@@ -1951,6 +2212,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform2f")]
@@ -1973,6 +2237,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform3f")]
@@ -1995,6 +2262,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform4f")]
@@ -2017,6 +2287,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("UniformMatrix2f")]
@@ -2039,6 +2312,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("UniformMatrix3f")]
@@ -2061,6 +2337,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("UniformMatrix4f")]
@@ -2083,6 +2362,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform1iv")]
@@ -2105,6 +2387,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform2iv")]
@@ -2127,6 +2412,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform3iv")]
@@ -2149,6 +2437,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform4iv")]
@@ -2171,6 +2462,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform1fv")]
@@ -2193,6 +2487,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform2fv")]
@@ -2215,6 +2512,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform3fv")]
@@ -2237,6 +2537,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("Uniform4fv")]
@@ -2259,6 +2562,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("UniformMatrix2fv")]
@@ -2281,6 +2587,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("UniformMatrix3fv")]
@@ -2303,6 +2612,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         [ExportName("UniformMatrix4fv")]
@@ -2325,6 +2637,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         // (Lots of VertexAttrib overloads)
@@ -2348,6 +2663,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         // Writing to the Draw Buffer [5.14.11]
@@ -2371,6 +2689,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         public static void DrawElements(GLPrimitiveType mode, int count, GLIndexType type, int offset)
@@ -2392,6 +2713,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         // Read Back Pixels [5.14.12]
@@ -2415,6 +2739,9 @@ namespace OpenGL
             @}
             else
                 build_error;
+
+            if defined(OPENGL_VALIDATION)
+                ValidateAfter();
         }
 
         // Detect context lost events [5.14.13]
@@ -2451,6 +2778,11 @@ namespace OpenGL
         }
 
         static void ValidateBefore()
+        {
+            // nothing for now
+        }
+
+        static void ValidateAfter()
         {
             // nothing for now
         }
