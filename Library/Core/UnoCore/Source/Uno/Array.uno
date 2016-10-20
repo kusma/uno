@@ -1,5 +1,6 @@
 using Uno.Compiler.ExportTargetInterop;
 using System.Collections.Generic;
+using Uno.Collections;
 
 namespace Uno
 {
@@ -228,6 +229,30 @@ namespace Uno
         extern(DOTNET) internal static void Copy(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length);
         extern(DOTNET) internal static void Reverse(Array array, int index, int length);
         extern(DOTNET) internal static void Reverse(Array array);
+
+        public static int BinarySearch<T>(T[] array, int index, int length, T value, IComparer<T> comparer)
+        {
+            if (comparer == null)
+                throw new ArgumentNullException("comparer");
+
+            var lo = index;
+            var hi = index + length;
+
+            while (lo < hi)
+            {
+                int mi = (lo + hi) / 2;
+
+                int cmp = comparer.Compare(array[mi], value);
+                if (cmp < 0)
+                    lo = mi + 1;
+                else if (cmp > 0)
+                    hi = mi;
+                else
+                    return mi; // exact hit
+            }
+
+            return -lo - 1;
+        }
     }
 }
 

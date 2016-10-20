@@ -249,5 +249,15 @@ namespace Uno.Collections
             Uno.Array.Sort(_data, 0, _used, comparer);
             _version++;
         }
+
+        public int BinarySearch(T item, IComparer<T> comparer)
+        {
+            return BinarySearch(0, _used, item, comparer);
+        }
+
+        public int BinarySearch(int index, int count, T item, IComparer<T> comparer)
+        {
+            return Uno.Array.BinarySearch(_data, index, count, item, comparer);
+        }
     }
 }

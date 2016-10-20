@@ -95,6 +95,7 @@
     "Source/Uno/CharPunctuationChecker.uno:Source",
     "Source/Uno/Collections/Dictionary.uno:Source",
     "Source/Uno/Collections/HashSet.uno:Source",
+    "Source/Uno/Collections/IComparer.uno:Source",
     "Source/Uno/Collections/ICollection.uno:Source",
     "Source/Uno/Collections/IDictionary.uno:Source",
     "Source/Uno/Collections/IEnumerable.uno:Source",

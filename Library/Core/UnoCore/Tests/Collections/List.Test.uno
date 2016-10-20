@@ -440,5 +440,16 @@ namespace Collections.Test
                 }
             }
         }
+
+        [Test]
+        public void BinarySearch()
+        {
+            var list = new List<string>();
+            list.Add("aaa");
+            list.Add("ccc");
+            Assert.AreEqual( 0, list.BinarySearch("aaa", null));
+            Assert.AreEqual(-2, list.BinarySearch("bbb", null));
+            Assert.AreEqual( 1, list.BinarySearch("ccc", null));
+        }
     }
 }
