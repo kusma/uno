@@ -50,6 +50,7 @@ private:
 
 uString* uGetStackTrace();
 uArray* uGetNativeStackTrace(int skipFrames);
+uString* uGetStackFrameSymbol(void *stackFrame);
 
 struct uAutoReleasePool
 {

@@ -67,6 +67,16 @@ namespace Exceptions.Test
                 var nativeStackTrace = e.NativeStackTrace;
                 Assert.IsTrue(nativeStackTrace != null);
                 Assert.IsTrue(nativeStackTrace.Length > 1);
+
+                Uno.Diagnostics.Debug.Log("**** stackTrace:\n---8<---\n" + nativeStackTrace);
+                foreach (var stackFrame in nativeStackTrace) {
+                    var symbol = extern<string>(stackFrame)"uGetStackFrameSymbol($0)";
+                    if (symbol != null)
+                        Uno.Diagnostics.Debug.Log("**** symbol: " + symbol);
+                    else
+                        Uno.Diagnostics.Debug.Log("**** symbol: " + stackFrame);
+                }
+                Uno.Diagnostics.Debug.Log("\n---8<---\n\n");
             }
         }
     }
