@@ -90,7 +90,8 @@ namespace Uno.Build
                 _options.Defines.Add("UNO_TEST");
                 _compilerOptions.TestOptions = new TestOptions {
                     TestServerUrl = _options.TestServerUrl,
-                    Filter = _options.TestFilter
+                    Filter = _options.TestFilter,
+                    CategoryFilter = _options.CategoryFilter
                 };
             }
 

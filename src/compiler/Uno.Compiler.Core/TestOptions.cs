@@ -4,5 +4,6 @@ namespace Uno.Compiler.Core
     {
         public string TestServerUrl;
         public string Filter;
+        public string CategoryFilter;
     }
 }

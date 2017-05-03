@@ -58,6 +58,7 @@ namespace Uno.TestRunner
                         Test = true,
                         Force = true,
                         TestFilter = _options.Filter,
+                        CategoryFilter = _options.CategoryFilter,
                         TestServerUrl = _options.RunLocal ? string.Empty : communicator.Prefix,
                         OutputDirectory = outputDirectory,
                         WarningLevel = 1,

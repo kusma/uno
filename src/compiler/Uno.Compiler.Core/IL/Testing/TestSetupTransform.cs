@@ -17,6 +17,7 @@ namespace Uno.Compiler.Core.IL.Testing
 
         private readonly Source _source;
         private readonly DataType _testAttributeType;
+        private readonly DataType _categoryAttributeType;
         private readonly DataType _ignoreAttributeType;
         private readonly DataType _testSetupType;
         private readonly DelegateType _actionType;
@@ -35,6 +36,7 @@ namespace Uno.Compiler.Core.IL.Testing
 
             _testOptions = Environment.Options.TestOptions.Value;
             _testAttributeType = ILFactory.GetType("Uno.Testing.TestAttribute");
+            _categoryAttributeType = ILFactory.GetType("Uno.Testing.CategoryAttribute");
             _ignoreAttributeType = ILFactory.GetType("Uno.Testing.IgnoreAttribute");
 
             if (_testAttributeType is InvalidType)
@@ -158,6 +160,15 @@ namespace Uno.Compiler.Core.IL.Testing
             {
                 var regex = new Regex(_testOptions.Filter, RegexOptions.CultureInvariant);
                 methods = methods.Where(m => regex.IsMatch(m.FullName)).ToList();
+            }
+
+            if (_testOptions.CategoryFilter != null)
+            {
+                var regex = new Regex(_testOptions.CategoryFilter, RegexOptions.CultureInvariant);
+                methods = methods.Where(m => {
+                    var categoryAttribs = m.Attributes.Where(x => x.ReturnType == _categoryAttributeType);
+                    return categoryAttribs.Select(x => x.Arguments[0].ToString().Trim('"')).Where(c => regex.IsMatch(c)).Any();
+                }).ToList();
             }
 
             methods.Sort((a, b) => string.Compare(a.FullName, b.FullName, StringComparison.InvariantCultureIgnoreCase));

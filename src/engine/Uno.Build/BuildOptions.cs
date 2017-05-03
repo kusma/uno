@@ -21,6 +21,7 @@ namespace Uno.Build
         public string OutputDirectory;
         public string MainClass;
         public string TestFilter;
+        public string CategoryFilter;
         public string TestServerUrl = "http://localhost";
         public string NativeArguments;
         public string RunArguments;

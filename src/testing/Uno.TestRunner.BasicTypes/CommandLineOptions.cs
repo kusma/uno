@@ -19,6 +19,7 @@ namespace Uno.TestRunner.BasicTypes
         public TimeSpan StartupTimeout;
         public bool Verbose;
         public string Filter;
+        public string CategoryFilter;
         public string Browser;
         public bool Trace;
         public bool AllowDebugger;
@@ -55,6 +56,8 @@ namespace Uno.TestRunner.BasicTypes
                 { "q|quiet", "Quiet, only prints output from compiler and debug_log in case of errors.", v => quiet = v != null },
                 { "f|filter=", "Only run tests matching this string", v => commandOptions.Filter = Regex.Escape(v) },
                 { "e|regex-filter=", "Only run tests matching this regular expression", v => commandOptions.Filter = v },
+                { "c|category-filter=", "Only run tests in categories matching this string", v => commandOptions.CategoryFilter = Regex.Escape(v) },
+                { "C|category-regex-filter=", "Only run tests in categories matching this regular expression", v => commandOptions.CategoryFilter = v },
                 { "o|timeout=", "Timeout for individual tests (in seconds)", (int v) => { commandOptions.TestTimeout = TimeSpan.FromSeconds(v); } },
                 { "startup-timeout=", "Timeout for connection from uno process (in seconds)", (int v) => { commandOptions.StartupTimeout = TimeSpan.FromSeconds(v); } },
                 { "trace", "Print trace information from unotest", v => { commandOptions.Trace = v != null; } },
