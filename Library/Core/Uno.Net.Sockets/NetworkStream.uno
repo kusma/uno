@@ -12,10 +12,16 @@ namespace Uno.Net.Sockets
         protected Socket Socket { get { return _socket; } }
 
         readonly Socket _socket;
+        readonly bool _ownsSocket;
 
-        public NetworkStream(Socket socket)
+        public NetworkStream(Socket socket) : base(socket, false)
+        {
+        }
+
+        public NetworkStream(Socket socket, bool ownsSocket)
         {
             _socket = socket;
+            _ownsSocket = ownsSocket;
         }
 
         public override long Length
@@ -69,6 +75,14 @@ namespace Uno.Net.Sockets
         public virtual bool DataAvailable
         {
             get { return _socket.Available > 0; }
+        }
+
+        public override void Close()
+        {
+            base.Close();
+
+            if (_ownsSocket)
+                _socket.Close();
         }
     }
 }
