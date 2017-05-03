@@ -1,7 +1,7 @@
 namespace Uno.Testing
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class IgnoreAttribute : Attribute
+    public sealed class IgnoreAttribute : Attribute
     {
         public readonly string Reason;
         public readonly string Condition;

@@ -1,7 +1,7 @@
 namespace Uno.Testing
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class TestAttribute : Attribute
+    public sealed class TestAttribute : Attribute
     {
     }
 }
