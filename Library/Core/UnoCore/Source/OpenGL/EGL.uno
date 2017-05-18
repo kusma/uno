@@ -4,11 +4,11 @@ using Uno;
 namespace OpenGL
 {
     /**
-        Uno wrappers for the EGL 1.0 API
+        Uno wrappers for the EGL 1.1 API
 
-        This class expose most of the API methods from EGL 1.0
+        This class expose most of the API methods from EGL 1.1
 
-        The only EGL 1.0 API call that is missing, is eglGetProcAddress. This
+        The only EGL 1.1 API call that is missing, is eglGetProcAddress. This
         is because uno has no idea how to call a generic function-pointer.
     */
     [extern(CPLUSPLUS) Require("Source.Include", "EGL/EGL.h")]
@@ -144,5 +144,29 @@ namespace OpenGL
 /*
         EGLAPI void (* APIENTRY eglGetProcAddress(const char *procname))();
 */
+
+        // EGL 1.1
+        public static bool SurfaceAttrib(EGLDisplayHandle dpy, EGLSurfaceHandle surface, EGLSurfaceAttrib attribute, int value)
+        @{
+            return eglSurfaceAttrib(dpy, surface, attribute, value) != EGL_FALSE;
+        @}
+
+        // EGL 1.1
+        public static bool BindTexImage(EGLDisplayHandle dpy, EGLSurfaceHandle surface, int buffer)
+        @{
+            return eglBindTexImage(dpy, surface, buffer) != EGL_FALSE;
+        @}
+
+        // EGL 1.1
+        public static bool ReleaseTexImage(EGLDisplayHandle dpy, EGLSurfaceHandle surface, int buffer)
+        @{
+            return eglReleaseTexImage(dpy, surface, buffer) != EGL_FALSE;
+        @}
+
+        // EGL 1.1
+        public static bool SwapInterval(EGLDisplayHandle dpy, int interval)
+        @{
+            return eglSwapInterval(dpy, interval) != EGL_FALSE;
+        @}
     }
 }

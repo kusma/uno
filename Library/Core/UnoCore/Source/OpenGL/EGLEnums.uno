@@ -29,7 +29,11 @@ namespace OpenGL
         TransparentBlueValue   = 0x3035,
         TransparentGreenValue  = 0x3036,
         TransparentRedValue    = 0x3037,
-        None                   = 0x3038  // Also a config value
+        None                   = 0x3038, // Also a config value
+        BindToTextureRGB       = 0x3039, // EGL 1.1
+        BindToTextureRGBA      = 0x303A, // "
+        MinSwapInterval        = 0x303B, // "
+        MaxSwapInterval        = 0x303C  // "
     }
 
     public extern(CPLUSPLUS && EGL) enum EGLContextAttrib
@@ -52,7 +56,8 @@ namespace OpenGL
         BadNativePixmap   = 0x300A,
         BadNativeWindow   = 0x300B,
         BadParameter      = 0x300C,
-        BadSurface        = 0x300D
+        BadSurface        = 0x300D,
+        ContextLost       = 0x300E  // EGL 1.1
     }
 
     public extern(CPLUSPLUS && EGL) enum EGLQueryString
@@ -73,7 +78,11 @@ namespace OpenGL
         None           = 0x3038, // same value as EGLConfigAttrib.None
         Height         = 0x3056,
         Width          = 0x3057,
-        LargestPbuffer = 0x3058
+        LargestPbuffer = 0x3058,
+        TextureFormat  = 0x3080,  // EGL 1.1, For pbuffers bound as textures
+        TextureTarget  = 0x3081,  // "
+        MipmapTexture  = 0x3082,  // "
+        MipmapLevel    = 0x3083   // "
     }
 
     public extern(CPLUSPLUS && EGL) enum EGLWaitEngine
