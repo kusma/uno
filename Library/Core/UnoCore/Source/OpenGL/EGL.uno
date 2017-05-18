@@ -4,11 +4,11 @@ using Uno;
 namespace OpenGL
 {
     /**
-        Uno wrappers for the EGL 1.1 API
+        Uno wrappers for the EGL 1.2 API
 
-        This class expose most of the API methods from EGL 1.1
+        This class expose most of the API methods from EGL 1.2
 
-        The only EGL 1.1 API call that is missing, is eglGetProcAddress. This
+        The only EGL 1.2 API call that is missing, is eglGetProcAddress. This
         is because uno has no idea how to call a generic function-pointer.
     */
     [extern(CPLUSPLUS) Require("Source.Include", "EGL/EGL.h")]
@@ -167,6 +167,36 @@ namespace OpenGL
         public static bool SwapInterval(EGLDisplayHandle dpy, int interval)
         @{
             return eglSwapInterval(dpy, interval) != EGL_FALSE;
+        @}
+
+        // EGL 1.2
+        public static bool BindAPI(EGLBindAPI api)
+        @{
+            return eglBindAPI(api) != EGL_FALSE;
+        @}
+
+        // EGL 1.2
+        public static EGLBindAPI QueryAPI()
+        @{
+            return eglQueryAPI();
+        @}
+
+        // EGL 1.2
+        public static bool WaitClient()
+        @{
+            return eglWaitClient(void) != EGL_FALSE;
+        @}
+
+        // EGL 1.2
+        public static bool ReleaseThread()
+        @{
+            return eglReleaseThread(void) != EGL_FALSE;
+        @}
+
+        // EGL 1.2
+        public static EGLSurfaceHandle CreatePbufferFromClientBuffer(EGLDisplayHandle dpy, EGLClientBufferType buftype, EGLClientBufferHandle buffer, EGLConfigHandle config, int[] attribList)
+        @{
+            return eglCreatePbufferFromClientBuffer(dpy, buftype, buffer, config, attribList != NULL ? (EGLint *)attribList->Ptr() : NULL);
         @}
     }
 }

@@ -3,6 +3,17 @@ using Uno;
 
 namespace OpenGL
 {
+    public extern(CPLUSPLUS && EGL) enum EGLBindAPI
+    {
+        OpenGLES = 0x30A0,
+        OpenVG   = 0x30A1
+    }
+
+    public extern(CPLUSPLUS && EGL) enum EGLClientBufferType
+    {
+        OpenVGImage = 0x3096
+    }
+
     public extern(CPLUSPLUS && EGL) enum EGLConfigAttrib
     {
         BufferSize             = 0x3020,
@@ -38,7 +49,9 @@ namespace OpenGL
 
     public extern(CPLUSPLUS && EGL) enum EGLContextAttrib
     {
-        ConfigID               = 0x3028  // same value as EGLConfigAttrib.ConfigID
+        ConfigID               = 0x3028, // same value as EGLConfigAttrib.ConfigID
+        RenderBuffer           = 0x3086, // EGL 1.2
+        ContextClientType      = 0x3097  // "
     }
 
     public extern(CPLUSPLUS && EGL) enum EGLError
