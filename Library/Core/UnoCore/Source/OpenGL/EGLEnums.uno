@@ -51,7 +51,8 @@ namespace OpenGL
     {
         ConfigID               = 0x3028, // same value as EGLConfigAttrib.ConfigID
         RenderBuffer           = 0x3086, // EGL 1.2
-        ContextClientType      = 0x3097  // "
+        ContextClientType      = 0x3097, // "
+        ContextClientVersion   = 0x3098  // EGL 1.3
     }
 
     public extern(CPLUSPLUS && EGL) enum EGLError
