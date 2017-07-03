@@ -78,7 +78,7 @@ namespace Uno.Graphics
 
         extern(OPENGL) static bool CheckExtensionSupport(string extensionName)
         {
-            var extensions = OpenGL.GL.GetString(OpenGL.GLStringName.Extensions).Split(new char[] { ' ' });
+            var extensions = OpenGL.GL.GetSupportedExtensions();
             foreach (var e in extensions)
             {
                 if (e.Equals(extensionName))

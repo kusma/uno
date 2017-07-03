@@ -531,6 +531,11 @@ namespace OpenGL
             GL._gl.ReadPixels(x, y, width, height, format, type, data);
         }
 
+        public static string[] GetSupportedExtensions()
+        {
+            return GL.GetString(GLStringName.Extensions).Split(new global::System.Char[] { ' '});
+        }
+
         public static void Initialize(IGL gl, bool debug)
         {
             GL._gl = debug ? (IGL)new GLDebugLayer(gl) : gl;

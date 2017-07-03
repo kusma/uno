@@ -2135,7 +2135,11 @@ namespace OpenGL
 
         // Detect and Enable Extensions [5.14.14]
 
-        //public static string[] GetSupportedExtensions();
+        public static string[] GetSupportedExtensions()
+        {
+            return GetString(OpenGL.GLStringName.Extensions).Split(new char[] { ' ' });
+        }
+
         //public static object GetExtension(string name);
 
 
