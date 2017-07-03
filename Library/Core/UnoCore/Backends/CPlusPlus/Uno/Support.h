@@ -4,6 +4,7 @@
 #pragma once
 #include <uBase/String.h>
 #include <uBase/Vector2.h>
+#include <XliPlatform/GL.h>
 @{int2:IncludeDirective}
 @{float2:IncludeDirective}
 @{Uno.Buffer:ForwardDeclaration}
@@ -54,6 +55,8 @@ struct uGLTextureInfo
 uImage::Texture* uLoadXliTexture(const uBase::String& filename, uArray* data);
 unsigned int uCreateGLTexture(uImage::Texture* texData, bool generateMipmap = true, uGLTextureInfo* outInfo = 0);
 /** @} */
+
+void GL_APIENTRY uGLDebugProcWrapper(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam);
 
 /**
     \addtogroup BufferUtils

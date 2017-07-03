@@ -275,6 +275,12 @@ unsigned int uCreateGLTexture(uImage::Texture* texData, bool generateMips, uGLTe
     return texHandle;
 }
 
+void GL_APIENTRY uGLDebugProcWrapper(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam)
+{
+    uDelegate* callback = reinterpret_cast<uDelegate*>(const_cast<void*>(userParam));
+    callback->Invoke(5, &source, &type, &id, &severity, uString::Ansi(message, length));
+}
+
 void uReverseBytes(uint8_t* ptr, size_t size)
 {
     uint8_t tmp;

@@ -62,6 +62,7 @@
     "Source/HTML5/Uint8Array.uno:Source",
     "Source/OpenGL/GL.uno:Source",
     "Source/OpenGL/GLBufferHandle.uno:Source",
+		"Source/OpenGL/GLDebug.uno:Source",
     "Source/OpenGL/GLDebugLayer.uno:Source",
     "Source/OpenGL/GLEnums.uno:Source",
     "Source/OpenGL/GLFramebufferHandle.uno:Source",
