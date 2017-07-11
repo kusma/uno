@@ -38,6 +38,7 @@ namespace OpenGL
     [extern(CPLUSPLUS) Require("Source.Declaration", "typedef void (GL_APIENTRY  *GLDEBUGPROCKHR)(GLenum source,GLenum type,GLuint id,GLenum severity,GLsizei length,const GLchar *message,const void *userParam);")]
     [extern(CPLUSPLUS) Require("Source.Declaration", "typedef void (GL_APIENTRYP PFNGLDEBUGMESSAGECALLBACKKHRPROC) (GLDEBUGPROCKHR callback, const void *userParam);")]
     [extern(CPLUSPLUS) Require("Source.Declaration", "typedef void (GL_APIENTRYP PFNGLDEBUGMESSAGEINSERTKHRPROC) (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);")]
+    [extern(CPLUSPLUS) Require("Source.Declaration", "#define GL_DEBUG_OUTPUT_KHR 0x92E0")]
     extern(OPENGL) public static class GLDebug
     {
         public delegate void DebugProc(GLDebugSource source, GLDebugType type, uint id, GLDebugSeverity severity, string message);
@@ -49,11 +50,15 @@ namespace OpenGL
                 static PFNGLDEBUGMESSAGECALLBACKKHRPROC glDebugMessageCallbackKHR = (PFNGLDEBUGMESSAGECALLBACKKHRPROC)eglGetProcAddress("glDebugMessageCallbackKHR");
 
                 if (callback == NULL)
+                {
                     glDebugMessageCallbackKHR(NULL, NULL);
+                    glDisable(GL_DEBUG_OUTPUT_KHR);
+                }
                 else
                 {
                     uRetain(callback); // HACK: leaking
                     glDebugMessageCallbackKHR(uGLDebugProcWrapper, callback);
+                    glEnable(GL_DEBUG_OUTPUT_KHR);
                 }
             @}
         }
