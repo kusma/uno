@@ -13,7 +13,7 @@ class GLHelper
 {
 private:
     static void _setEGLConfig(bool forPBuffer);
-    static const EGLint _contextAttribs[];
+    static EGLint _contextAttribs[5];
     static EGLConfig _eglPBufferConfig;
     static EGLContext _eglPBufferContext;
     static EGLSurface _eglPBufferSurface;
@@ -46,4 +46,5 @@ public:
     static EGLContext GetSurfaceContext();
     static void SetEGLConfigs() { _setEGLConfig(true); _setEGLConfig(false); }
     static void AssertValidContext();
+    static bool CheckExtension(const char *name);
 };

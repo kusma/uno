@@ -20,7 +20,19 @@ jobject GLHelper::_dummyJavaSurface;
 ANativeWindow* GLHelper::_dummyNativeWindow = NULL;
 EGLSurface GLHelper::_eglDummySurface;
 
-const EGLint GLHelper::_contextAttribs[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
+#ifndef EGL_CONTEXT_FLAGS_KHR
+#define EGL_CONTEXT_FLAGS_KHR 0x30FC
+#endif
+
+#ifndef EGL_CONTEXT_OPENGL_DEBUG_BIT_KHR
+#define EGL_CONTEXT_OPENGL_DEBUG_BIT_KHR 0x00000001
+#endif
+
+EGLint GLHelper::_contextAttribs[5] =
+{
+    EGL_CONTEXT_CLIENT_VERSION, 2,
+    EGL_NONE
+};
 
 void GLHelper::DeInitGL()
 {
@@ -45,11 +57,31 @@ void GLHelper::DeInitGL()
     GLHelper::_eglPBufferSurface = EGL_NO_SURFACE;
 }
 
+bool GLHelper::CheckExtension(const char *name)
+{
+    const char* extensions = eglQueryString(_eglDisplay, EGL_EXTENSIONS);
+    const char* hit = strstr(extensions, name);
+    if (hit != NULL)
+    {
+        const char *end = hit + strlen(name);
+        return *end == ' ' || *end == '\0';
+    }
+
+    return false;
+}
+
 void GLHelper::InitGL()
 {
     // Create display
     _eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     eglInitialize(_eglDisplay, 0, 0);
+
+    if (CheckExtension("EGL_KHR_create_context"))
+    {
+        _contextAttribs[2] = EGL_CONTEXT_FLAGS_KHR;
+        _contextAttribs[3] = EGL_CONTEXT_OPENGL_DEBUG_BIT_KHR;
+        _contextAttribs[4] = EGL_NONE;
+    }
 
     // Get suitable configs for this device
     SetEGLConfigs();
