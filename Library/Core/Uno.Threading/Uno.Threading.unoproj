@@ -23,6 +23,7 @@
     "Thread.uno:Source",
     "ThreadPool.uno:Source",
     "Tasks/Tasks.uno:Source",
+    "Implementation/Posix/posix_helpers.h:CHeader:UNIX && !PInvoke",
     "Implementation/Posix/posix_mutex.cpp:CSource:UNIX && !PInvoke",
     "Implementation/Posix/posix_mutex.h:CHeader:UNIX && !PInvoke",
     "Implementation/Posix/posix_reset_event.cpp:CSource:UNIX && !PInvoke",

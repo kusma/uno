@@ -40,15 +40,7 @@ bool uPosixWaitOneResetEvent(uPosixResetEvent* resetEvent, int timeoutMillis)
     struct timespec timeout;
 
     if (timeoutMillis >= 0)
-    {
-        struct timeval now;
-        gettimeofday(&now, NULL);
-        uint64_t nanoseconds = (now.tv_sec * 1000000000ull) + (now.tv_usec * 1000);
-        uint64_t timeoutNanoseconds = (timeoutMillis * 1000000ull) + nanoseconds;
-
-        timeout.tv_sec = (time_t)(timeoutNanoseconds / 1000000000ull);
-        timeout.tv_nsec = (long)(timeoutNanoseconds % 1000000000ull);
-    }
+        timeout = uPthreadTimeoutToTimespec(timeoutMillis);
 
     pthread_mutex_lock(&resetEvent->mutex);
 
