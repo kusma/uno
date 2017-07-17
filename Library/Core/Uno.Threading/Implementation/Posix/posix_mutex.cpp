@@ -1,7 +1,14 @@
 #include <Implementation/Posix/posix_mutex.h>
+#include <Implementation/Posix/posix_helpers.h>
 #include <pthread.h>
-#include <errno.h>
+
+#if defined __ANDROID_API__ && (__ANDROID_API__ >= 21)
+#define HAVE_PTHREAD_MUTEX_TIMEDLOCK
+#endif
+
+#ifndef HAVE_PTHREAD_MUTEX_TIMEDLOCK
 #include <uBase/Time.h>
+#endif
 
 bool uPthreadCreateMutex(pthread_mutex_t* mutex)
 {
@@ -20,6 +27,13 @@ bool uPthreadWaitOneMutex(pthread_mutex_t* mutexHandle, int millisecondsTimeout)
     else if (millisecondsTimeout == 0)
         return pthread_mutex_trylock(mutexHandle) == 0;
 
+#ifdef HAVE_PTHREAD_MUTEX_TIMEDLOCK
+
+    struct timespec timeout = uPthreadTimeoutToTimespec(millisecondsTimeout);
+    return pthread_mutex_timedlock(mutexHandle, &timeout) == 0;
+
+#else
+
     // spin-based emulation
     long long timeout = uBase::GetTicks() + millisecondsTimeout * 10000ll;
     while (pthread_mutex_trylock(mutexHandle) == EBUSY)
@@ -31,4 +45,5 @@ bool uPthreadWaitOneMutex(pthread_mutex_t* mutexHandle, int millisecondsTimeout)
         sched_yield();
     }
     return true;
+#endif
 }
