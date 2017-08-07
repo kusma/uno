@@ -27,6 +27,9 @@ namespace Uno
 
         public DateTime(long ticks, DateTimeKind kind)
         {
+            if (ticks < 0)
+                throw new ArgumentOutOfRangeException(nameof(ticks));
+
             _kind = kind;
             _time = new ZonedDateTime(new Instant(ticks) - DotNetTimeOffset, DateTimeZone.Utc);
         }

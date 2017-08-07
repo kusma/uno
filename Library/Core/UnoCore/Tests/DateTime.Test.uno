@@ -8,6 +8,20 @@ namespace Uno.Test
         // Unix epoch is January 1, 1970 at 00:00:00.000
         const long unixEpochTicks = 621355968000000000L;
 
+        void NegativeTicks()
+        {
+            new DateTime(-1, DateTimeKind.Utc);
+        }
+
+        [Test]
+        public void TickRange()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(NegativeTicks);
+
+            var epoch = new DateTime(0, DateTimeKind.Utc);
+            Assert.AreEqual(0, epoch.Ticks);
+        }
+
         [Test]
         public void ZeroCtor()
         {
