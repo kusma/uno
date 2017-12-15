@@ -8,6 +8,7 @@ import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.nio.ByteBuffer;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.HashMap;
 import android.util.Log;
 import android.annotation.SuppressLint;
@@ -154,7 +155,11 @@ public abstract class HttpRequest {
 					UploadTask task = new UploadTask();
 					_uploadTask = task;
 					if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB) {
-						task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, _url, _method, _uploadHeaders, (Integer)_timeout, data, request, (Boolean)_verifyHost, (Boolean)_useCaching);
+						try {
+							task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, _url, _method, _uploadHeaders, (Integer)_timeout, data, request, (Boolean)_verifyHost, (Boolean)_useCaching);
+						} catch (RejectedExecutionException e) {
+							task.execute(_url, _method, _uploadHeaders, (Integer)_timeout, data, request, (Boolean)_verifyHost, (Boolean)_useCaching);
+						}
 					} else {
 						task.execute(_url, _method, _uploadHeaders, (Integer)_timeout, data, request, (Boolean)_verifyHost, (Boolean)_useCaching);
 					}
@@ -179,7 +184,11 @@ public abstract class HttpRequest {
 						dataBuffer = ByteBuffer.wrap(data.getBytes());
 					}
 					if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB) {
-						task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, _url, _method, _uploadHeaders, (Integer)_timeout, dataBuffer, request, (Boolean)_verifyHost, (Boolean)_useCaching);
+						try {
+							task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, _url, _method, _uploadHeaders, (Integer)_timeout, dataBuffer, request, (Boolean)_verifyHost, (Boolean)_useCaching);
+						} catch (RejectedExecutionException e) {
+							task.execute(_url, _method, _uploadHeaders, (Integer)_timeout, dataBuffer, request, (Boolean)_verifyHost, (Boolean)_useCaching);
+						}
 					} else {
 						task.execute(_url, _method, _uploadHeaders, (Integer)_timeout, dataBuffer, request, (Boolean)_verifyHost, (Boolean)_useCaching);
 					}
@@ -220,7 +229,11 @@ public abstract class HttpRequest {
 					DownloadTask task = new DownloadTask();
 					_downloadTask = task;
 					if (Build.VERSION.SDK_INT > 10) {
-						task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, stream, request);
+						try {
+							task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, stream, request);
+						} catch (RejectedExecutionException e) {
+							task.execute(stream, request);
+						}
 					} else {
 						task.execute(stream, request);
 					}
