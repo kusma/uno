@@ -5,7 +5,7 @@ class Main: Uno.Application
 
     public override void Draw()
     {
-        draw
+        draw // $W draw statements are obsolete
         {
             PixelColor: float4(0);
             ClipPosition: float4(0);
@@ -29,7 +29,7 @@ class C: D
 {
     public void Draw()
     {
-        draw
+        draw // $W draw statements are obsolete
         {
             PixelColor: float4(0);
             ClipPosition: float4(0);

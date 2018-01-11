@@ -1622,6 +1622,8 @@ namespace Uno.Compiler.Frontend.Analysis
                                 {
                                     if (OptionalContextual(Tokens.Draw))
                                     {
+                                        Log.Warning(token, null, "draw statements are obsolete");
+
                                         if (Optional(TokenType.Semicolon))
                                             return new AstDraw(token, new AstBlockMember[0]);
 
