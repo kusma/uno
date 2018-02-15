@@ -28,14 +28,6 @@ namespace Http.Test
         }
 
         [Test]
-        public void Combine()
-        {
-            Assert.AreEqual("http://test.com/test/uri", Uri.Combine("http://test.com", "test/uri"));
-            Assert.AreEqual("http://test.com/test/uri", Uri.Combine("http://test.com/test", "/uri"));
-            Assert.AreEqual("http://test.com/test/uri", Uri.Combine("http://test.com/", "/test/uri"));
-        }
-
-        [Test]
         public void AbsoluteUri()
         {
             Assert.AreEqual("http://test.com/", new Uri("http://test.com").AbsoluteUri);
@@ -190,21 +182,6 @@ namespace Http.Test
             Assert.AreEqual("/somecontroller/index?test=123", new Uri("http://username:password@test.com/somecontroller/index?test=123").PathAndQuery);
             Assert.AreEqual("/somecontroller/index?test=123", new Uri("http://username:password@test.com/somecontroller/index?test=123#action").PathAndQuery);
             Assert.AreEqual("/somecontroller/index", new Uri("http://username:password@test.com/somecontroller/index#action?test=123").PathAndQuery);
-        }
-
-        [Test]
-        public void GetQueryParameters()
-        {
-            var uri = new Uri("http://username:password@test.com/somecontroller/index?a=1&b=2&cdef=test#action");
-            var parameters = uri.GetQueryParameters();
-            Assert.AreEqual(3, parameters.Keys.Count);
-
-            CheckValue(parameters, "a", "1");
-            CheckValue(parameters, "cdef", "test");
-
-            uri = new Uri("http://username:password@test.com/somecontroller/index#action");
-            parameters = uri.GetQueryParameters();
-            Assert.AreEqual(0, parameters.Keys.Count);
         }
 
         [Test]
