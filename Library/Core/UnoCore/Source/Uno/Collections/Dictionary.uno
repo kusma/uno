@@ -333,29 +333,30 @@ namespace Uno.Collections
 
             while (true)
             {
-                if (_buckets[x].State == BucketState.Empty)
+                switch (_buckets[x].State)
                 {
-                    _buckets[x].State = BucketState.Used;
-                    _buckets[x].Value = value;
-                    _buckets[x].Key = key;
-                    _count++;
-                    _version++;
-                    return;
-                }
-                else if (_buckets[x].State == BucketState.Dummy)
-                {
-                    _buckets[x].State = BucketState.Used;
-                    _buckets[x].Value = value;
-                    _buckets[x].Key = key;
-                    _count++;
-                    _dummies--;
-                    _version++;
-                    return;
-                }
-                else if (_buckets[x].State == BucketState.Used)
-                {
-                    if (Generic.Equals(_buckets[x].Key, key))
-                        throw new Exception("Dictionary already contains the given key");
+                    case BucketState.Empty:
+                        _buckets[x].State = BucketState.Used;
+                        _buckets[x].Value = value;
+                        _buckets[x].Key = key;
+                        _count++;
+                        _version++;
+                        return;
+
+                    case BucketState.Dummy:
+                        _buckets[x].State = BucketState.Used;
+                        _buckets[x].Value = value;
+                        _buckets[x].Key = key;
+                        _count++;
+                        _dummies--;
+                        _version++;
+                        return;
+
+                    case BucketState.Used:
+                        if (Generic.Equals(_buckets[x].Key, key))
+                            throw new Exception("Dictionary already contains the given key");
+
+                        break;
                 }
 
                 x++;
@@ -372,18 +373,19 @@ namespace Uno.Collections
             while (true)
             {
                 var bucket = _buckets[x];
-                if (bucket.State == BucketState.Used)
+                switch (bucket.State)
                 {
-                    if (Generic.Equals(bucket.Key, key))
-                    {
-                        value = bucket.Value;
-                        return true;
-                    }
-                }
-                else if (bucket.State == BucketState.Empty)
-                {
-                    value = default(TValue);
-                    return false;
+                    case BucketState.Used:
+                        if (Generic.Equals(bucket.Key, key))
+                        {
+                            value = bucket.Value;
+                            return true;
+                        }
+                        break;
+
+                    case BucketState.Empty:
+                        value = default(TValue);
+                        return false;
                 }
 
                 x++;
@@ -399,22 +401,23 @@ namespace Uno.Collections
 
             while (true)
             {
-                if (_buckets[x].State == BucketState.Used)
+                switch (_buckets[x].State)
                 {
-                    if (Generic.Equals(_buckets[x].Key, key))
-                    {
-                        _buckets[x].State = BucketState.Dummy;
-                        _buckets[x].Value = default(TValue);
-                        _buckets[x].Key = default(TKey);
-                        _count--;
-                        _dummies++;
-                        _version++;
-                        return true;
-                    }
-                }
-                else if (_buckets[x].State == BucketState.Empty)
-                {
-                    return false;
+                    case BucketState.Used:
+                        if (Generic.Equals(_buckets[x].Key, key))
+                        {
+                            _buckets[x].State = BucketState.Dummy;
+                            _buckets[x].Value = default(TValue);
+                            _buckets[x].Key = default(TKey);
+                            _count--;
+                            _dummies++;
+                            _version++;
+                            return true;
+                        }
+                        break;
+
+                    case BucketState.Empty:
+                        return false;
                 }
 
                 x++;
@@ -431,16 +434,15 @@ namespace Uno.Collections
             while (true)
             {
                 var bucket = _buckets[x];
-                if (bucket.State == BucketState.Used)
+                switch (bucket.State)
                 {
-                    if (Generic.Equals(bucket.Key, key))
-                    {
-                        return true;
-                    }
-                }
-                else if (bucket.State == BucketState.Empty)
-                {
-                    return false;
+                    case BucketState.Used:
+                        if (Generic.Equals(bucket.Key, key))
+                            return true;
+                    break;
+
+                    case BucketState.Empty:
+                        return false;
                 }
 
                 x++;
@@ -459,16 +461,15 @@ namespace Uno.Collections
                 while (true)
                 {
                     var bucket = _buckets[x];
-                    if (bucket.State == BucketState.Used)
+                    switch (bucket.State)
                     {
-                        if (Generic.Equals(bucket.Key, key))
-                        {
-                            return bucket.Value;
-                        }
-                    }
-                    else if (bucket.State == BucketState.Empty)
-                    {
-                        throw new Exception("Dictionary did not contain the given key");
+                        case BucketState.Used:
+                            if (Generic.Equals(bucket.Key, key))
+                                return bucket.Value;
+                            break;
+
+                        case BucketState.Empty:
+                            throw new Exception("Dictionary did not contain the given key");
                     }
 
                     x++;
@@ -483,19 +484,20 @@ namespace Uno.Collections
 
                 while (true)
                 {
-                    if (_buckets[x].State == BucketState.Used)
+                    switch (_buckets[x].State)
                     {
-                        if (Generic.Equals(_buckets[x].Key, key))
-                        {
-                            _buckets[x].Value = value;
-                            _version++;
+                        case BucketState.Used:
+                            if (Generic.Equals(_buckets[x].Key, key))
+                            {
+                                _buckets[x].Value = value;
+                                _version++;
+                                return;
+                            }
+                            break;
+
+                        case BucketState.Empty:
+                            Add(key, value);
                             return;
-                        }
-                    }
-                    else if (_buckets[x].State == BucketState.Empty)
-                    {
-                        Add(key, value);
-                        return;
                     }
 
                     x++;
