@@ -371,15 +371,16 @@ namespace Uno.Collections
 
             while (true)
             {
-                if (_buckets[x].State == BucketState.Used)
+                var bucket = _buckets[x];
+                if (bucket.State == BucketState.Used)
                 {
-                    if (Generic.Equals(_buckets[x].Key, key))
+                    if (Generic.Equals(bucket.Key, key))
                     {
-                        value = _buckets[x].Value;
+                        value = bucket.Value;
                         return true;
                     }
                 }
-                else if (_buckets[x].State == BucketState.Empty)
+                else if (bucket.State == BucketState.Empty)
                 {
                     value = default(TValue);
                     return false;
@@ -429,14 +430,15 @@ namespace Uno.Collections
 
             while (true)
             {
-                if (_buckets[x].State == BucketState.Used)
+                var bucket = _buckets[x];
+                if (bucket.State == BucketState.Used)
                 {
-                    if (Generic.Equals(_buckets[x].Key, key))
+                    if (Generic.Equals(bucket.Key, key))
                     {
                         return true;
                     }
                 }
-                else if (_buckets[x].State == BucketState.Empty)
+                else if (bucket.State == BucketState.Empty)
                 {
                     return false;
                 }
@@ -456,14 +458,15 @@ namespace Uno.Collections
 
                 while (true)
                 {
-                    if (_buckets[x].State == BucketState.Used)
+                    var bucket = _buckets[x];
+                    if (bucket.State == BucketState.Used)
                     {
-                        if (Generic.Equals(_buckets[x].Key, key))
+                        if (Generic.Equals(bucket.Key, key))
                         {
-                            return _buckets[x].Value;
+                            return bucket.Value;
                         }
                     }
-                    else if (_buckets[x].State == BucketState.Empty)
+                    else if (bucket.State == BucketState.Empty)
                     {
                         throw new Exception("Dictionary did not contain the given key");
                     }
