@@ -2,6 +2,15 @@ using Uno.Collections;
 using Uno.Compiler.ExportTargetInterop;
 using Uno.Text;
 
+namespace System
+{
+    [extern(DOTNET) DotNetType]
+    public extern(DOTNET) class String
+    {
+        public static extern string Format(string format, object arg0);
+    }
+}
+
 namespace Uno.Runtime.Implementation.Internal
 {
     internal enum FormatSpecifier
@@ -42,28 +51,28 @@ namespace Uno.Runtime.Implementation.Internal
         public static string Format(string formatString, sbyte b)
         {
             if (GetFormatSpecifier(formatString) == FormatSpecifier.Hexadecimal)
-                return FormatHex(formatString, (ulong)(byte)b, 8);
+                return FormatHex(formatString, (ulong)(byte)b);
             return Format(formatString, (long)b);
         }
 
         public static string Format(string formatString, short s)
         {
             if (GetFormatSpecifier(formatString) == FormatSpecifier.Hexadecimal)
-                return FormatHex(formatString, (ulong)(ushort)s, 8);
+                return FormatHex(formatString, (ulong)(ushort)s);
             return Format(formatString, (long)s);
         }
 
         public static string Format(string formatString, int i)
         {
             if (GetFormatSpecifier(formatString) == FormatSpecifier.Hexadecimal)
-                return FormatHex(formatString, (ulong)(uint)i, 8);
+                return FormatHex(formatString, (ulong)(uint)i);
             return Format(formatString, (long)i);
         }
 
         public static string Format(string formatString, long i)
         {
             if (GetFormatSpecifier(formatString) == FormatSpecifier.Hexadecimal)
-                return FormatHex(formatString, (ulong)i, 16);
+                return FormatHex(formatString, (ulong)i);
             else if (i >= 0)
                 return Format(formatString, (ulong)i);
             else
@@ -79,7 +88,7 @@ namespace Uno.Runtime.Implementation.Internal
                 case FormatSpecifier.FixedPoint:
                     return FormatFixedPoint(formatString, i);
                 case FormatSpecifier.Hexadecimal:
-                    return FormatHex(formatString, i, 16);
+                    return FormatHex(formatString, i);
                 case FormatSpecifier.Exponential:
                     return FormatExponential(formatString, (double)i);
                 case FormatSpecifier.General:
@@ -193,26 +202,48 @@ namespace Uno.Runtime.Implementation.Internal
         static readonly char[] lowerHexChars = new char[] {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
         static readonly char[] upperHexChars = new char[] {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 
-        private static string FormatHex(ulong l, int maxLength, bool upperCase)
+        [extern(CPLUSPLUS) Require("Source.Include", "errno.h")]
+        [extern(CPLUSPLUS) Require("Source.Include", "inttypes.h")]
+        private static string FormatHex(ulong l, int digits, bool upperCase)
         {
-            var hexChars = upperCase ? upperHexChars : lowerHexChars;
+            if defined(CIL)
+                return System.String.Format("{0:" + (upperCase ? 'X' : 'x') + digits + "}", l);
+            else if defined(CPLUSPLUS)
+            @{
+                if (digits < 1)
+                    digits = 1;
 
-            var buffer = new char[maxLength];
-            int index = maxLength;
-            do
-            {
-                buffer[--index] = hexChars[(int)l & 0xF];
-                l >>= 4;
-            }
-            while (l != 0);
+                const char *fmt = upperCase ? ("%.*" PRIX64) : ("%.*" PRIx64);
+                char buf[64];
+                int len = snprintf(buf, sizeof(buf), fmt, digits, l);
+                if (len < 0 && errno == ERANGE)
+                {
+                    // Some snprintf implementations return -1 and sets errno to
+                    // ERANGE instead of returning the desired length, so let's
+                    // reconstruct the value we want here.
+                    len = snprintf(NULL, 0, fmt, digits, l);
+                    U_ASSERT(len > sizeof(buf));
+                }
 
-            return new string(buffer, index, maxLength - index);
+                char* ptr = buf;
+                if (len > sizeof(buf))
+                {
+                    // Stackalloc bigger buffer, and try again
+                    ptr = (char*)alloca(len + 1);
+                    len = snprintf(ptr, len + 1, fmt, digits, l);
+                }
+
+                U_ASSERT(len >= 0);
+                return uString::Ansi(ptr, len);
+            @}
+            else
+                build_error;
         }
 
-        private static string FormatHex(string formatString, ulong l, int maxLength)
+        private static string FormatHex(string formatString, ulong l)
         {
             var desiredLength = formatString.Length > 1 ? Digits(formatString) : 0;
-            return Pad(FormatHex(l, maxLength, char.IsUpper(formatString[0])), desiredLength);
+            return FormatHex(l, desiredLength, char.IsUpper(formatString[0]));
         }
 
         // Exponential
