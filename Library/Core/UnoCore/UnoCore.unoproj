@@ -86,6 +86,7 @@
     "Source/Uno/Attribute.uno:Source",
     "Source/Uno/AttributeTargets.uno:Source",
     "Source/Uno/AttributeUsageAttribute.uno:Source",
+    "Source/Uno/BitConverter.uno:Source",
     "Source/Uno/Bool.uno:Source",
     "Source/Uno/Buffer.uno:Source",
     "Source/Uno/Byte.uno:Source",

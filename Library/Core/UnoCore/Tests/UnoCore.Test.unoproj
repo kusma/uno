@@ -91,6 +91,7 @@
     "ArrayHelper.uno:Source",
     "ArrayIndex.Test.uno:Source",
     "ArraySort.Test.uno:Source",
+    "BitConverter.Test.uno:Source",
     "Bool.Test.uno:Source",
     "Buffer.Test.uno:Source",
     "Byte.Test.uno:Source",
