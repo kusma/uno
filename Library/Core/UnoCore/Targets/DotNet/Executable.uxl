@@ -16,6 +16,7 @@
     <Set AppLoader.Assembly="@(PrebuiltDirectory)/uno-app.exe" />
     <Set AppLoader.Class="Uno.AppLoader.AppDelegate" Condition="HOST_MAC && !HEADLESS" />
     <Set AppLoader.Class="Uno.AppLoader.MainForm" Condition="HOST_WIN32 && !HEADLESS" />
+    <Set AppLoader.Class="Uno.AppLoader.MainWindow" Condition="HOST_LINUX && !HEADLESS" />
     <Set AppLoader.Class="Uno.AppLoader.Program" Condition="HEADLESS" />
     <Set AppLoader.Method="LoadApplication" />
 
